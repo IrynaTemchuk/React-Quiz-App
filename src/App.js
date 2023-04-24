@@ -1,4 +1,3 @@
-import logo from './logo.svg';
 import './App.css';
 import React, { useState } from 'react';
 
@@ -42,20 +41,44 @@ export default function App() {
 		},
 	];
 
+  const [currentQuestion, setCurrentQuestion] = useState(0);
+
+  const [showScore, setShowScore] = useState(false);
+
+  const [score, setScore] = useState(0);
+
+  const handleAnswerButtonClick = (isCorrect) => {
+    if(isCorrect===true){
+      alert("This answer is correct!");
+      setScore(score + 1);
+    } else{
+      alert("This answer is false!");
+    }
+
+    const nextQuestion = currentQuestion + 1;
+    if(nextQuestion < questions.length){
+      setCurrentQuestion(nextQuestion);
+    }else{
+      setShowScore(true)
+    }
+    
+  }
+
 	return (
 		<div className='app'>
-			{false ? (
-				<div className='score-section'>You scored 1 out of {questions.length}</div>
+			{showScore ? (
+				<div className='score-section'>You scored {score} out of {questions.length}</div>
 			) : (
 				<>
 					<div className='question-section'>
 						<div className='question-count'>
-							<span>Question 1</span>/{questions.length}
+							<span>Question {currentQuestion + 1}</span>/{questions.length}
 						</div>
-						<div className='question-text'>{questions[0].questionText}</div>
+						<div className='question-text'>{questions[currentQuestion].questionText}</div>
 					</div>
 					<div className='answer-section'>
-						{questions[0].answerOptions.map((answerOptions)=> <button>{answerOptions.answerText}</button>)}
+						{questions[currentQuestion].answerOptions.map((answerOptions)=> (
+            <button onClick={()=> handleAnswerButtonClick(answerOptions.isCorrect)}>{answerOptions.answerText}</button>))}
 					</div>
 				</>
 			)}
