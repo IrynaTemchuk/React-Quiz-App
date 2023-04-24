@@ -1,11 +1,11 @@
 .app {
-  background-color: #252d4a;
+  background-color: #6392EF;
   width: 450px;
   min-height: 200px;
   height: min-content;
   border-radius: 15px;
   padding: 20px;
-  box-shadow: 10px 10px 42px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 42px 0px rgba(0, 0, 0, 0.35);
   display: flex;
   justify-content: space-evenly;
 }
@@ -60,9 +60,10 @@ button {
   border-radius: 15px;
   display: flex;
   padding: 5px;
-  justify-content: flex-start;
+  justify-content: center;
   align-items: center;
-  border: 5px solid #234668;
+  text-align: center;
+  border: 2px solid #D5BFF7;
   cursor: pointer;
 }
 
