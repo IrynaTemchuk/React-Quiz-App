@@ -1,13 +1,26 @@
 .app {
   background-color: #252d4a;
-  width: 450px;
-  min-height: 200px;
+  width: 520px;
+  min-height: 275px;
   height: min-content;
   border-radius: 15px;
   padding: 20px;
   box-shadow: 10px 10px 42px 0px rgba(0, 0, 0, 0.35);
   display: flex;
-  justify-content: space-evenly;
+  flex-direction: column;
+  justify-content: center;
+}
+
+h1 {
+  font-size: xx-large;
+  text-align: center;
+  padding: 5px 7px;
+}
+
+.container {
+  display: flex;
+  justify-content: space-around;
+  padding: 5px 7px;
 }
 
 .score-section {
