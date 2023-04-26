@@ -81,7 +81,7 @@ export default function App() {
 						<div className='answer-section'>
 							{questions[currentQuestion].answerOptions.map((answerOptions) => (
 								<button 
-								className={answerOptions.isCorrect === true ? 'correct' : 'incorrect'}
+								// className={answerOptions.isCorrect === true ? 'correct' : 'incorrect'}
 								onClick={() => handleAnswerButtonClick(answerOptions.isCorrect)}>{answerOptions.answerText}</button>))}
 						</div>
 					</>
