@@ -69,8 +69,8 @@ const App = () => {
 		setCurrentQuestion(0);
 		setScore(0);
 		setShowScore(false)
-	  }
-	
+	}
+
 
 	return (
 		<div className='app'>
@@ -78,10 +78,10 @@ const App = () => {
 			<div className='container'>
 				{showScore ? (
 					<>
-					<div className='score'>
-					<div className='score-section'>You scored {score} out of {questions.length}</div>
-					<button class="play-again-button" onClick={() => resetQuiz()}>Play Again</button>
-					</div>
+						<div className='score'>
+							<div className='score-section'>You scored {score} out of {questions.length}</div>
+							<button class="play-again-button" onClick={() => resetQuiz()}>Play Again</button>
+						</div>
 					</>
 				) : (
 					<>
@@ -93,9 +93,9 @@ const App = () => {
 						</div>
 						<div className='answer-section'>
 							{questions[currentQuestion].answerOptions.map((answerOptions) => (
-								<button 
-								// className={answerOptions.isCorrect === true ? 'correct' : 'incorrect'}
-								onClick={() => handleAnswerButtonClick(answerOptions.isCorrect)}>{answerOptions.answerText}</button>))}
+								<button
+									// className={answerOptions.isCorrect === true ? 'correct' : 'incorrect'}
+									onClick={() => handleAnswerButtonClick(answerOptions.isCorrect)}>{answerOptions.answerText}</button>))}
 						</div>
 					</>
 				)}
