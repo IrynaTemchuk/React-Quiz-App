@@ -1,8 +1,15 @@
 import './App.css';
 import React, { useState } from 'react';
 
-export default function App() {
-	const questions = [
+
+const App = () => {
+	const [currentQuestion, setCurrentQuestion] = useState(0);
+
+	const [showScore, setShowScore] = useState(false);
+
+	const [score, setScore] = useState(0);
+
+	const [questions, setQuestions] = useState([
 		{
 			questionText: 'What is the capital of France?',
 			answerOptions: [
@@ -39,13 +46,7 @@ export default function App() {
 				{ answerText: '7', isCorrect: true },
 			],
 		},
-	];
-
-	const [currentQuestion, setCurrentQuestion] = useState(0);
-
-	const [showScore, setShowScore] = useState(false);
-
-	const [score, setScore] = useState(0);
+	]);
 
 	const handleAnswerButtonClick = (isCorrect) => {
 		if (isCorrect === true) {
@@ -64,12 +65,24 @@ export default function App() {
 
 	}
 
+	const resetQuiz = () => {
+		setCurrentQuestion(0);
+		setScore(0);
+		setShowScore(false)
+	  }
+	
+
 	return (
 		<div className='app'>
 			<h1>Quiz App</h1>
 			<div className='container'>
 				{showScore ? (
+					<>
+					<div className='score'>
 					<div className='score-section'>You scored {score} out of {questions.length}</div>
+					<button class="play-again-button" onClick={() => resetQuiz()}>Play Again</button>
+					</div>
+					</>
 				) : (
 					<>
 						<div className='question-section'>
@@ -91,3 +104,4 @@ export default function App() {
 	);
 }
 
+export default App;

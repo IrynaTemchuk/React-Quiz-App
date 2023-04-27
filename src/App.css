@@ -1,7 +1,7 @@
 .app {
   background-color: #252d4a;
   width: 520px;
-  min-height: 275px;
+  min-height: 300px;
   height: min-content;
   border-radius: 15px;
   padding: 20px;
@@ -72,7 +72,8 @@ button {
   background-color: #252d4a;
   border-radius: 15px;
   display: flex;
-  padding: 5px;
+  padding: 5px 3px;
+  margin: 5px 3px;
   justify-content: center;
   align-items: center;
   text-align: center;
@@ -98,4 +99,26 @@ button:focus {
 
 button svg {
   margin-right: 5px;
+}
+
+.score{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.play-again-button {
+  width: 100%;
+  height: 50px;
+  font-size: 16px;
+  color: #ffffff;
+  background-color: #545e75;
+  padding: 7px 7px;
+  margin: 12px 10px;
+}
+
+.play-again-button:hover {
+  background-color: #f4e04d;
+  color: #252d4a;
 }
