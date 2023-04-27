@@ -48,21 +48,29 @@ const App = () => {
 		},
 	]);
 
+	const [bgStyleCorrect, setBgStyleCorrect] = useState("");
+	const [bgStyleIncorrect, setBgStyleIncorrect] = useState("");
+
 	const handleAnswerButtonClick = (isCorrect) => {
 		if (isCorrect === true) {
-			alert("This answer is correct!");
-			setScore(score + 1);
+			setScore(score + 1);			
+			setBgStyleCorrect("correct")
+			alert("This answer is correct!");			
 		} else {
+			setBgStyleIncorrect("incorrect")			
 			alert("This answer is false!");
 		}
+	}
 
+	const next = () => {
+		setBgStyleCorrect("")
+		setBgStyleIncorrect("")
 		const nextQuestion = currentQuestion + 1;
 		if (nextQuestion < questions.length) {
 			setCurrentQuestion(nextQuestion);
 		} else {
 			setShowScore(true)
 		}
-
 	}
 
 	const resetQuiz = () => {
@@ -94,8 +102,11 @@ const App = () => {
 						<div className='answer-section'>
 							{questions[currentQuestion].answerOptions.map((answerOptions) => (
 								<button
-									// className={answerOptions.isCorrect === true ? 'correct' : 'incorrect'}
+									className={answerOptions.isCorrect === true ? bgStyleCorrect : bgStyleIncorrect}
 									onClick={() => handleAnswerButtonClick(answerOptions.isCorrect)}>{answerOptions.answerText}</button>))}
+						</div>
+						<div>
+								<button onClick={() => next()}>Next</button>
 						</div>
 					</>
 				)}
