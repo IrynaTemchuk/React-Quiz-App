@@ -53,13 +53,15 @@ const App = () => {
 
 	const handleAnswerButtonClick = (isCorrect) => {
 		if (isCorrect === true) {
-			setScore(score + 1);			
-			setBgStyleCorrect("correct")
+			setScore(score + 1);
 			alert("This answer is correct!");			
 		} else {
-			setBgStyleIncorrect("incorrect")			
+					
 			alert("This answer is false!");
 		}
+
+		setBgStyleCorrect("correct")
+		setBgStyleIncorrect("incorrect")
 	}
 
 	const next = () => {
