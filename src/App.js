@@ -110,7 +110,7 @@ const App = () => {
 											onClick={() => handleAnswerButtonClick(answerOptions.id, answerOptions.isCorrect)}>{answerOptions.answerText}</button>))}
 								</div>
 							</div>
-							<div className='nextbtn-'>
+							<div className='nextbtn-section'>
 								<button className='nextbtn' onClick={() => next()}>Next</button>
 							</div>
 						

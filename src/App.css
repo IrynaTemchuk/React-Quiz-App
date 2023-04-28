@@ -92,10 +92,22 @@ button:hover {
   background-color: #555e7d;
 }
 
-.nextbtn {
+.nextbtn-section {
   display: flex;
+  flex-direction: column;
+  justify-content: center;
   align-items: center;
+}
+
+.nextbtn {
   width: 240px;
+  color: #ffffff;
+  background-color: #545e75;
+}
+
+.nextbtn:hover {
+  background-color: #f4e04d;
+  color: #252d4a;
 }
 
 /* SCORE/PLAY AGAIN */
