@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 
 const App = () => {
@@ -8,6 +8,8 @@ const App = () => {
 	const [showScore, setShowScore] = useState(false);
 
 	const [score, setScore] = useState(0);
+
+	// const [timeLeft, setTimeLeft] = useState(10);
 
 	const [questions, setQuestions] = useState([
 		{
@@ -55,17 +57,33 @@ const App = () => {
 		} else {
 			document.getElementById(id).style.backgroundColor = "red"
 		}
-	}
 
-	const resetBgColor = () => {
 		var collection = document.getElementsByClassName('button-answer')
 		for (let i = 0; i < collection.length; i++) {
-			collection[i].style.backgroundColor = "";
+			collection[i].disabled = true;
 		}
 	}
 
+	const resetBtnAnswer = () => {
+		var collection = document.getElementsByClassName('button-answer')
+		for (let i = 0; i < collection.length; i++) {
+			collection[i].style.backgroundColor = "";
+			collection[i].disabled = false;
+		
+		}
+	}
+
+	// useEffect(() => {
+	// 	// start the timer for the current question when it changes
+	// 	setTimeLeft(questions[currentQuestion].time);
+	// 	const interval = setInterval(() => {
+	// 	  setTimeLeft((prevTime) => prevTime - 1);
+	// 	}, 1000);
+	// 	return () => clearInterval(interval);
+	//   }, [currentQuestion, questions]);
+
 	const next = () => {
-		resetBgColor("")
+		resetBtnAnswer("")
 		const nextQuestion = currentQuestion + 1;
 		if (nextQuestion < questions.length) {
 			setCurrentQuestion(nextQuestion);
@@ -94,26 +112,28 @@ const App = () => {
 					</>
 				) : (
 					<>
-						
-							<div className='question'>
-								<div className='question-section'>
-									<div className='question-count'>
-										<span>Question {currentQuestion + 1}</span>/{questions.length}
-									</div>
-									<div className='question-text'>{questions[currentQuestion].questionText}</div>
+						<div className='progress-bar'>
+							<span className='timer'></span>
+						</div>
+						<div className='question'>
+							<div className='question-section'>
+								<div className='question-count'>
+									<span>Question {currentQuestion + 1}</span>/{questions.length}
 								</div>
-								<div className='answer-section'>
-									{questions[currentQuestion].answerOptions.map((answerOptions) => (
-										<button
-											id={answerOptions.id}
-											className='button-answer'
-											onClick={() => handleAnswerButtonClick(answerOptions.id, answerOptions.isCorrect)}>{answerOptions.answerText}</button>))}
-								</div>
+								<div className='question-text'>{questions[currentQuestion].questionText}</div>
 							</div>
-							<div className='nextbtn-section'>
-								<button className='nextbtn' onClick={() => next()}>Next</button>
+							<div className='answer-section'>
+								{questions[currentQuestion].answerOptions.map((answerOptions) => (
+									<button
+										id={answerOptions.id}
+										className='button-answer'
+										onClick={() => handleAnswerButtonClick(answerOptions.id, answerOptions.isCorrect)}>{answerOptions.answerText}</button>))}
 							</div>
-						
+						</div>
+						<div className='nextbtn-section'>
+							<button className='nextbtn' onClick={() => next()}>Next</button>
+						</div>
+
 					</>
 				)}
 			</div>
