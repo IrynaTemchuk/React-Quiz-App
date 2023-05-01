@@ -50,6 +50,21 @@ h1 {
   text-align: center;
   /* width: 97%; */
   height: 1px;
+  animation: 15s timer infinite linear;
+}
+
+@keyframes timer {
+  100% {
+    width: 0%;
+    background: red;
+  }
+  50% {
+    background: orange;
+  }
+  0% {
+    width: 100%;
+    background: green;
+  }
 }
 
 /* QUESTION/LEFT SECTION */
