@@ -85,9 +85,7 @@ const App = () => {
 					setTimerValue(timerValue - 1);
 				}
 				element.style.width = timerValue + '%';
-			} else {
-				clearInterval(timerID);
-			}
+			} 
 		}
 
 		return () => clearInterval(timerID);
