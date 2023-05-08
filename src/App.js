@@ -1,5 +1,5 @@
 import './App.css';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 
 // ALL CONST/FUNCTIONS
@@ -57,11 +57,41 @@ const App = () => {
 			document.getElementById(id).style.backgroundColor = "red"
 		}
 
+		clearInterval(timerID);
+		disableBtnAnswer();
+	}
+
+	const disableBtnAnswer = () => {
 		var collection = document.getElementsByClassName('button-answer')
 		for (let i = 0; i < collection.length; i++) {
 			collection[i].disabled = true;
 		}
 	}
+
+	const [timerValue, setTimerValue] = useState(100);
+
+	let timerID;
+	useEffect(() => {
+		timerID = setInterval(runTimer, 100);
+
+		function runTimer() {
+			console.log(timerValue);
+			const element = document.getElementById("timer");
+			if  (element != null) {
+				if (timerValue == 0){
+					clearInterval(timerID);
+					disableBtnAnswer();
+				} else {
+					setTimerValue(timerValue - 1);
+				}
+				element.style.width = timerValue + '%';
+			} else {
+				clearInterval(timerID);
+			}
+		}
+
+		return () => clearInterval(timerID);
+	}, [timerValue, timerID]);
 
 	const resetBtnAnswer = () => {
 		var collection = document.getElementsByClassName('button-answer')
@@ -72,6 +102,7 @@ const App = () => {
 	}
 
 	const next = () => {
+		setTimerValue(100);
 		resetBtnAnswer("")
 		const nextQuestion = currentQuestion + 1;
 		if (nextQuestion < questions.length) {
@@ -87,7 +118,7 @@ const App = () => {
 		setShowScore(false)
 	}
 
-// APP STRUCTURE 
+	// APP STRUCTURE 
 	return (
 		<div className='app'>
 			<h1>Quiz App</h1>
@@ -102,7 +133,7 @@ const App = () => {
 				) : (
 					<>
 						<div className='progress-bar'>
-							<span className='timer'></span>
+							<span id='timer'></span>
 						</div>
 						<div className='question'>
 							<div className='question-section'>
