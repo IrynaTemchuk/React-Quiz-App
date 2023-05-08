@@ -79,7 +79,8 @@ const App = () => {
 			if  (element != null) {
 				if (timerValue === 0){
 					clearInterval(timerID);
-					disableBtnAnswer();
+					document.getElementsByClassName('question')[0].innerHTML =
+        "<span>Time's up. Click on 'next' to go on.</span>";
 				} else {
 					setTimerValue(timerValue - 1);
 				}
