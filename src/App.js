@@ -75,10 +75,9 @@ const App = () => {
 		timerID = setInterval(runTimer, 100);
 
 		function runTimer() {
-			console.log(timerValue);
 			const element = document.getElementById("timer");
 			if  (element != null) {
-				if (timerValue == 0){
+				if (timerValue === 0){
 					clearInterval(timerID);
 					disableBtnAnswer();
 				} else {
@@ -115,7 +114,8 @@ const App = () => {
 	const resetQuiz = () => {
 		setCurrentQuestion(0);
 		setScore(0);
-		setShowScore(false)
+		setShowScore(false);
+		setTimerValue(100)
 	}
 
 	// APP STRUCTURE 
@@ -127,7 +127,7 @@ const App = () => {
 					<>
 						<div className='score'>
 							<div className='score-section'>You scored {score} out of {questions.length}</div>
-							<button class="play-again-button" onClick={() => resetQuiz()}>Play Again</button>
+							<button className='play-again-button' onClick={() => resetQuiz()}>Play Again</button>
 						</div>
 					</>
 				) : (
