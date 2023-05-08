@@ -1,15 +1,14 @@
 import './App.css';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 
 
+// ALL CONST/FUNCTIONS
 const App = () => {
 	const [currentQuestion, setCurrentQuestion] = useState(0);
 
 	const [showScore, setShowScore] = useState(false);
 
 	const [score, setScore] = useState(0);
-
-	// const [timeLeft, setTimeLeft] = useState(10);
 
 	const [questions, setQuestions] = useState([
 		{
@@ -69,18 +68,8 @@ const App = () => {
 		for (let i = 0; i < collection.length; i++) {
 			collection[i].style.backgroundColor = "";
 			collection[i].disabled = false;
-		
 		}
 	}
-
-	// useEffect(() => {
-	// 	// start the timer for the current question when it changes
-	// 	setTimeLeft(questions[currentQuestion].time);
-	// 	const interval = setInterval(() => {
-	// 	  setTimeLeft((prevTime) => prevTime - 1);
-	// 	}, 1000);
-	// 	return () => clearInterval(interval);
-	//   }, [currentQuestion, questions]);
 
 	const next = () => {
 		resetBtnAnswer("")
@@ -98,7 +87,7 @@ const App = () => {
 		setShowScore(false)
 	}
 
-
+// APP STRUCTURE 
 	return (
 		<div className='app'>
 			<h1>Quiz App</h1>
