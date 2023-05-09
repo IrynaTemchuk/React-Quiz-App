@@ -1,15 +1,14 @@
 import './App.css';
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 
+// ALL CONST/FUNCTIONS
 const App = () => {
 	const [currentQuestion, setCurrentQuestion] = useState(0);
 
 	const [showScore, setShowScore] = useState(false);
 
 	const [score, setScore] = useState(0);
-
-	// const [timeLeft, setTimeLeft] = useState(10);
 
 	const [questions, setQuestions] = useState([
 		{
@@ -58,31 +57,54 @@ const App = () => {
 			document.getElementById(id).style.backgroundColor = "red"
 		}
 
+		clearInterval(timerID);
+		disableBtnAnswer();
+	}
+
+	const disableBtnAnswer = () => {
 		var collection = document.getElementsByClassName('button-answer')
 		for (let i = 0; i < collection.length; i++) {
 			collection[i].disabled = true;
 		}
 	}
 
+	const valueMax = 98;
+	const [timerValue, setTimerValue] = useState(valueMax);
+
+	let timerID;
+	useEffect(() => {
+		timerID = setInterval(runTimer, 150);
+
+		function runTimer() {
+			const element = document.getElementById("timer");
+			if (element != null) {
+				if (timerValue === 0) {
+					clearInterval(timerID);
+					disableBtnAnswer();
+					document.getElementById('time-up').style.display = 'flex';
+					document.getElementById('question').style.display = 'none';
+				} else {
+					setTimerValue(timerValue - 1);
+				}
+				element.style.width = timerValue + '%';
+			}
+		}
+
+		return () => clearInterval(timerID);
+	}, [timerValue, timerID]);
+
 	const resetBtnAnswer = () => {
 		var collection = document.getElementsByClassName('button-answer')
 		for (let i = 0; i < collection.length; i++) {
 			collection[i].style.backgroundColor = "";
 			collection[i].disabled = false;
-		
 		}
 	}
 
-	// useEffect(() => {
-	// 	// start the timer for the current question when it changes
-	// 	setTimeLeft(questions[currentQuestion].time);
-	// 	const interval = setInterval(() => {
-	// 	  setTimeLeft((prevTime) => prevTime - 1);
-	// 	}, 1000);
-	// 	return () => clearInterval(interval);
-	//   }, [currentQuestion, questions]);
-
 	const next = () => {
+		document.getElementById('time-up').style.display = 'none';
+		document.getElementById('question').style.display = 'flex';
+		setTimerValue(valueMax);
 		resetBtnAnswer("")
 		const nextQuestion = currentQuestion + 1;
 		if (nextQuestion < questions.length) {
@@ -95,10 +117,11 @@ const App = () => {
 	const resetQuiz = () => {
 		setCurrentQuestion(0);
 		setScore(0);
-		setShowScore(false)
+		setShowScore(false);
+		setTimerValue(valueMax)
 	}
 
-
+	// APP STRUCTURE 
 	return (
 		<div className='app'>
 			<h1>Quiz App</h1>
@@ -107,15 +130,16 @@ const App = () => {
 					<>
 						<div className='score'>
 							<div className='score-section'>You scored {score} out of {questions.length}</div>
-							<button class="play-again-button" onClick={() => resetQuiz()}>Play Again</button>
+							<button className='play-again-button' onClick={() => resetQuiz()}>Play Again</button>
 						</div>
 					</>
 				) : (
 					<>
 						<div className='progress-bar'>
-							<span className='timer'></span>
+							<span id='timer'></span>
 						</div>
-						<div className='question'>
+						<span id='time-up'>Time's up. Click "next" to go on.</span>
+						<div id='question'>
 							<div className='question-section'>
 								<div className='question-count'>
 									<span>Question {currentQuestion + 1}</span>/{questions.length}
