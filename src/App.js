@@ -68,24 +68,26 @@ const App = () => {
 		}
 	}
 
-	const [timerValue, setTimerValue] = useState(100);
+	const valueMax = 98;
+	const [timerValue, setTimerValue] = useState(valueMax);
 
 	let timerID;
 	useEffect(() => {
-		timerID = setInterval(runTimer, 100);
+		timerID = setInterval(runTimer, 150);
 
 		function runTimer() {
 			const element = document.getElementById("timer");
-			if  (element != null) {
-				if (timerValue === 0){
+			if (element != null) {
+				if (timerValue === 0) {
 					clearInterval(timerID);
-					document.getElementsByClassName('question')[0].innerHTML =
-        "<span>Time's up. Click on 'next' to go on.</span>";
+					disableBtnAnswer();
+					document.getElementById('time-up').style.display = 'flex';
+					document.getElementById('question').style.display = 'none';
 				} else {
 					setTimerValue(timerValue - 1);
 				}
 				element.style.width = timerValue + '%';
-			} 
+			}
 		}
 
 		return () => clearInterval(timerID);
@@ -100,7 +102,9 @@ const App = () => {
 	}
 
 	const next = () => {
-		setTimerValue(100);
+		document.getElementById('time-up').style.display = 'none';
+		document.getElementById('question').style.display = 'flex';
+		setTimerValue(valueMax);
 		resetBtnAnswer("")
 		const nextQuestion = currentQuestion + 1;
 		if (nextQuestion < questions.length) {
@@ -114,7 +118,7 @@ const App = () => {
 		setCurrentQuestion(0);
 		setScore(0);
 		setShowScore(false);
-		setTimerValue(100)
+		setTimerValue(valueMax)
 	}
 
 	// APP STRUCTURE 
@@ -134,7 +138,8 @@ const App = () => {
 						<div className='progress-bar'>
 							<span id='timer'></span>
 						</div>
-						<div className='question'>
+						<span id='time-up'>Time's up. Click "next" to go on.</span>
+						<div id='question'>
 							<div className='question-section'>
 								<div className='question-count'>
 									<span>Question {currentQuestion + 1}</span>/{questions.length}
